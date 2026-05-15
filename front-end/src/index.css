@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* general */
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  user-select: none;
+}
+body {
+  background-color: #fafafa;
+  color: #18181b;
+}
+#logo-text,
+.hh1 {
+  font-family: "Outfit", sans-serif;
+}
+
+.pp {
+  font-family: "Inter", sans-serif;
+}
