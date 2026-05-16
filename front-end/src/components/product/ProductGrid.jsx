@@ -2,6 +2,8 @@ import React from "react";
 import { useSearch } from "../../context/SearchContext";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { FiArrowUpRight } from "react-icons/fi";
+import boseImg from "../../assets/Products/Bose_H2_No.png";
+import sonyImg from "../../assets/Products/x.png";
 
 const ProductGrid = () => {
   const { setSearchTerm } = useSearch();
@@ -47,7 +49,7 @@ const ProductGrid = () => {
         {/* IMAGE */}
         <img
           className="absolute -right-4 -bottom-10 h-[500px] lg:h-[550px] object-contain drop-shadow-2xl transition-all duration-1000 group-hover:scale-105 group-hover:-translate-y-2"
-          src="/src/assets/Products/Bose_H2_No.png"
+          src={boseImg}
           alt="bose"
         />
       </div>
@@ -82,7 +84,7 @@ const ProductGrid = () => {
         
         <img
           className="absolute -right-4 -bottom-10 h-[500px] lg:h-[550px] object-contain drop-shadow-2xl transition-all duration-1000 group-hover:scale-105 group-hover:-translate-y-2"
-          src="/src/assets/Products/x.png"
+          src={sonyImg}
           alt="sony"
         />
       </div>

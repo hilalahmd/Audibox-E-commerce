@@ -4,6 +4,11 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useSearch } from "../../context/SearchContext";
+import cover3Img from "../../assets/cover3.png";
+import product1Img from "../../assets/product1.png";
+import headphonesImg from "../../assets/headphones.png";
+import speakerImg from "../../assets/speaker.png";
+import twsImg from "../../assets/tws.png";
 
 const HomeGrid = () => {
   const { goProducts } = useAppNavigation();
@@ -69,7 +74,7 @@ const HomeGrid = () => {
             className="hidden lg:block z-10 pr-12 scale-110 translate-x-10"
           >
             <img
-              src="/src/assets/cover3.png"
+              src={cover3Img}
               alt="Beats Hero"
               className="w-[450px] object-contain drop-shadow-2xl"
             />
@@ -90,7 +95,7 @@ const HomeGrid = () => {
           <motion.img
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.6 }}
-            src="/src/assets/product1.png"
+            src={product1Img}
             alt="Feature Product"
             className="w-full h-auto max-h-[250px] object-contain drop-shadow-xl mt-4 mb-10"
           />
@@ -116,7 +121,7 @@ const HomeGrid = () => {
             Headphones
           </h3>
           <img
-            src="/src/assets/headphones.png"
+            src={headphonesImg}
             alt="Headphones"
             className="h-[220px] object-contain z-10 transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl"
           />
@@ -132,7 +137,7 @@ const HomeGrid = () => {
             Speakers
           </h3>
           <img
-            src="/src/assets/speaker.png"
+            src={speakerImg}
             alt="Speakers"
             className="h-[220px] object-contain z-10 transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl"
           />
@@ -148,7 +153,7 @@ const HomeGrid = () => {
             True Wireless
           </h3>
           <img
-            src="/src/assets/tws.png"
+            src={twsImg}
             alt="TWS"
             className="h-[220px] object-contain z-10 transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl"
           />

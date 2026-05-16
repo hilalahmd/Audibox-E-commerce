@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { FiArrowRight } from "react-icons/fi";
+import tailImg from "../../assets/tail.png";
 
 const Tailer = () => {
   const { goProducts } = useAppNavigation();
@@ -49,7 +50,7 @@ const Tailer = () => {
         >
           <img
             className="w-full max-w-[500px] lg:max-w-none lg:w-[130%] h-auto object-contain -rotate-6 transition-transform duration-1000 hover:rotate-0 drop-shadow-2xl"
-            src="/src/assets/tail.png"
+            src={tailImg}
             alt="Premium Audio"
           />
         </div>
