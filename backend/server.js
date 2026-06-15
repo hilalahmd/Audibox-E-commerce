@@ -5,11 +5,11 @@ const rateLimit = require('express-rate-limit')
 const cookieParser = require('cookie-parser')
 const helmet = require('helmet')
 
-dotenv.config()
+dotenv.config({ path: '.env' })
+console.log('JWT_SECRET loaded:', !!process.env.JWT_SECRET)
+console.log('MONGO_URI loaded:', !!process.env.MONGO_URI)
 
-
-const connectDB =
-  require('./src/config/db')
+const connectDB = require('./src/config/db')
 
 /* USER ROUTES */
 const authRoutes = require('./src/routes/user/authRoutes')
@@ -33,8 +33,6 @@ connectDB()
 
 const app = express()
 
-
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5000
@@ -45,9 +43,7 @@ const authLimiter = rateLimit({
   max: 1000
 })
 
-
 app.use(limiter)
-
 app.use(cookieParser())
 
 const allowedOrigins = [
@@ -58,7 +54,6 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // allow requests with no origin (e.g. Render health checks, curl)
     if (!origin) return callback(null, true)
     if (allowedOrigins.includes(origin)) return callback(null, true)
     callback(new Error(`CORS: origin ${origin} not allowed`))
@@ -68,96 +63,40 @@ app.use(cors({
 }))
 
 app.use(helmet())
-
 app.use(express.json())
 
-
-
 app.use((req, res, next) => {
-
-  console.log(
-    `${req.method} ${req.url}`
-  )
-
+  console.log(`${req.method} ${req.url}`)
   next()
-
 })
 
-
-
-app.use(
-  '/api/auth',
-  authLimiter,
-  authRoutes
-)
-
-app.use(
-  '/api/admin',
-  authLimiter,
-  adminAuthRoutes
-)
-
-app.use(
-  '/api/upload',
-  uploadRoutes
-)
-
-app.use(
-  '/api/stripe',
-  stripeRoutes
-)
+app.use('/api/auth', authLimiter, authRoutes)
+app.use('/api/admin', authLimiter, adminAuthRoutes)
+app.use('/api/upload', uploadRoutes)
+app.use('/api/stripe', stripeRoutes)
 
 /* IMPORTANT — MAIN ROUTES */
-
 app.use('/api', userProductRoutes)
 app.use('/api', adminProductRoutes)
-
 app.use('/api', userUserRoutes)
 app.use('/api', adminUserRoutes)
-
 app.use('/api', userOrderRoutes)
 app.use('/api', adminOrderRoutes)
-
 app.use('/api', wishlistRoutes)
-
-
-
 app.use('/api/cart', cartRoutes)
 
-
-
 app.use((req, res) => {
-
-  console.log(
-    ` Route not found: ${req.method} ${req.url}`
-  )
-
-  res.status(404).json({
-    message: `Route ${req.url} not found`
-  })
-
+  console.log(` Route not found: ${req.method} ${req.url}`)
+  res.status(404).json({ message: `Route ${req.url} not found` })
 })
-
 
 app.use((err, req, res, next) => {
-
-  console.error(
-    "Unhandled Error:",
-    err.stack
-  )
-
-  res.status(500).json({
-    message: err.message
-  })
-
+  console.error("Unhandled Error:", err.stack)
+  res.status(500).json({ message: err.message })
 })
 
-
-const PORT =
-  process.env.PORT || 5000
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () =>
-  console.log(
-    `🚀 Server running on port ${PORT}`
-  )
+  console.log(`🚀 Server running on port ${PORT}`)
 )
